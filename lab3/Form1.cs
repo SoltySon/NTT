@@ -24,32 +24,18 @@ namespace lab3
             public string name { get; set; }
             public Creator creator;
         }
-
+        List<Type> newCreateType = new List<Type>();
+        List<Type> newEquipmentType = new List<Type>();
         Table tb= new Table();
 
         private Dictionary<int, Controller> WearDictionary;
         private List<Wear> wear;
         public Wear currentWear;
-
+	public Wear plugin;
+        	public int CurrentIndex;
         public Form1()
         {
             InitializeComponent();
-
-            Wear plugin;
-        public int CurrentIndex;
-            this.itemsList = new List<Item>();
-            InitializeComponent();
-            Assembly asm = Assembly.LoadFile(@"D:\Serialization\AdditionalClasses\bin\Debug\AdditionalClasses.dll");
-            foreach (Type t in asm.GetExportedTypes())
-            {
-                if (typeof(Item).IsAssignableFrom(t))
-                {
-                    plugin = (Item)asm.CreateInstance(t.FullName);
-                    mainFactory.FactoryDictionary.Add(plugin.GetType().Name, plugin);
-                    Array.Resize(ref this.ItemsTypes, this.ItemsTypes.Length + 1);
-                    this.ItemsTypes[this.ItemsTypes.Length - 1] = plugin.GetType();
-                }
-            }
 
             WearDictionary = new Dictionary<int, Controller>();
             WearDictionary.Add(0, new Controller() { name = "Dress", creator = new DressCreator() });
@@ -58,13 +44,34 @@ namespace lab3
             WearDictionary.Add(3, new Controller() { name = "Shirt", creator = new ShirtCreator() });
             WearDictionary.Add(4, new Controller() { name = "Shorts", creator = new ShortsCreator() });
             WearDictionary.Add(5, new Controller() { name = "Tshirt", creator = new TshirtCreator() });
-            wear = new List<Wear>();
+
+            Assembly asm = Assembly.LoadFile(@"C:\Users\Ilya\Desktop\lab4\ClassLibrary1\bin\Debug\ClassLibrary1.dll");
+            foreach (Type t in asm.GetExportedTypes())
+            {
+                if (typeof(Wear).IsAssignableFrom(t))
+                {
+                    plugin = (Wear)asm.CreateInstance(t.FullName);
+                }
+            }
+            //var num = 6;
+            //Type refer;
+            //Assembly asc = Assembly.LoadFile(@"C:\Users\Ilya\Desktop\lab4\ClassLibrary2\bin\Debug\ClassLibrary2.dll");
+            /*foreach (Type t in asc.GetExportedTypes())
+            {
+                    plugin = (Wear)asc.CreateInstance(t.FullName);
+                    WearDictionary.Add(num, new Controller() { name = "Shoes", creator = new t.FullName() });
+                num += 1;
+            }
+            Type[] types = asc.GetTypes();
+            foreach (Type typ in types)
+            {
+            if (typ.IsSubclassOf(typeof(Creator)))
+                { refer = typ; }
+            }
+            WearDictionary.Add(num, new Controller() { name = "Shoes", creator = new (Creator)Activator.CreateInstance(refer()) });
+            wear = new List<Wear>();*/
 
         }
-
-        //
-
-        //
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -124,7 +131,11 @@ namespace lab3
 
         private void plugins_Click(object sender, EventArgs e)
         {
-            var dialog = new OpenFileDialog();
+            getNewTypes();
+            addCreators();
+            addNewButtons();
+
+            /*var dialog = new OpenFileDialog();
             dialog.ShowDialog();
             dialog.CheckFileExists = true;
             dialog.Multiselect = true;
@@ -133,6 +144,61 @@ namespace lab3
             WearDictionary.Add(6, new Controller() { name = "Shoes", creator = new ShoesCreator() });
             WearDictionary.Add(7, new Controller() { name = "Sneakers", creator = new SneakersCreator() });
             WearDictionary.Add(8, new Controller() { name = "Socks", creator = new SocksCreator() });*/
+        }
+
+        private void addNewButtons()
+        {
+            for (int i = 0; i < newEquipmentType.Count; i++)
+            {
+                Button button = new Button();
+                button.Name = "btn" + i.ToString();
+                button.Text = newEquipmentType[i].Name;
+                button.Width = buttonDeserialize.Width;
+                button.Height = buttonDeserialize.Height;
+                button.Left = buttonDeserialize.Left;
+                button.Font = buttonDeserialize.Font;
+                button.Top = (105 + button.Height) + i * 28;
+
+                button.Click += new System.EventHandler(buttonAdd_Click);
+
+                this.Controls.Add(button);
+
+            }
+
+
+        }
+
+        private void addCreators()
+        {
+            var num = 6;
+            for (int i = 0; i < newEquipmentType.Count; i++)
+            {
+                WearDictionary.Add(num, new Controller() { name = "Shoes", creator = new (Activator.CreateInstance(newCreateType[i])as Creator) }); /////////error
+                WearDictionary[num] = (Controller)Activator.CreateInstance(newCreateType[i]);
+                num++;
+            }
+        }
+
+        private void getNewTypes()
+        {
+            Load pl = new Load();
+            List<Type> l1 = new List<Type>();
+            List<Type> l2 = new List<Type>();
+            l1 = pl.LoadPlugin(true);
+            l2 = pl.LoadPlugin(false);
+            foreach (Type create in l1)
+            {
+                foreach (Type eq in l2)
+                {
+                    int start = eq.Name.Length;
+                    int end = create.Name.Length;
+                    if (String.Compare(eq.Name, create.Name.Substring((end - start), start)) == 0)
+                    {
+                        newCreateType.Add(create);
+                        newEquipmentType.Add(eq);
+                    }
+                }
+            }
         }
 
         private void buttonDeserialize_Click(object sender, EventArgs e)

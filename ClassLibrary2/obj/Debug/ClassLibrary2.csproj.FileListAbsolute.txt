@@ -1,0 +1,9 @@
+C:\Users\Ilya\Desktop\lab4\ClassLibrary2\bin\Debug\ClassLibrary2.dll
+C:\Users\Ilya\Desktop\lab4\ClassLibrary2\bin\Debug\ClassLibrary2.pdb
+C:\Users\Ilya\Desktop\lab4\ClassLibrary2\bin\Debug\ClassLibrary1.dll
+C:\Users\Ilya\Desktop\lab4\ClassLibrary2\bin\Debug\lab3.exe
+C:\Users\Ilya\Desktop\lab4\ClassLibrary2\bin\Debug\ClassLibrary1.pdb
+C:\Users\Ilya\Desktop\lab4\ClassLibrary2\bin\Debug\lab3.pdb
+C:\Users\Ilya\Desktop\lab4\ClassLibrary2\obj\Debug\ClassLibrary2.csprojResolveAssemblyReference.cache
+C:\Users\Ilya\Desktop\lab4\ClassLibrary2\obj\Debug\ClassLibrary2.dll
+C:\Users\Ilya\Desktop\lab4\ClassLibrary2\obj\Debug\ClassLibrary2.pdb

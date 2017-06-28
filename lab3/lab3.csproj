@@ -56,6 +56,7 @@
     <Compile Include="Core\Creator.cs" />
     <Compile Include="Core\DressCreator.cs" />
     <Compile Include="Core\JacketCreator.cs" />
+    <Compile Include="Core\Load.cs" />
     <Compile Include="Core\PantsCreator.cs" />
     <Compile Include="Core\ShirtCreator.cs" />
     <Compile Include="Core\ShortsCreator.cs" />

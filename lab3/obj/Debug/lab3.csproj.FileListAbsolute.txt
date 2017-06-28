@@ -49,3 +49,4 @@ C:\Users\Ilya\Desktop\lab4\lab3\obj\Debug\lab3.Properties.Resources.resources
 C:\Users\Ilya\Desktop\lab4\lab3\obj\Debug\lab3.csproj.GenerateResource.Cache
 C:\Users\Ilya\Desktop\lab4\lab3\obj\Debug\lab3.exe
 C:\Users\Ilya\Desktop\lab4\lab3\obj\Debug\lab3.pdb
+C:\Users\Ilya\Desktop\lab4\lab3\obj\Debug\lab3.csprojResolveAssemblyReference.cache

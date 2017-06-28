@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace lab3.Core
 {
-    abstract class Creator
+    public abstract class Creator
     {
         abstract public Wear Create(String name);
     }
