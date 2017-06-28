@@ -50,6 +50,7 @@
             this.textBox7 = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
             this.listBox1 = new System.Windows.Forms.ListBox();
+            this.plugins = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -268,6 +269,17 @@
             this.listBox1.TabIndex = 5;
             this.listBox1.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
             // 
+            // Plugins
+            // 
+            this.plugins.Location = new System.Drawing.Point(50, 200);
+            this.plugins.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.plugins.Name = "Plugins";
+            this.plugins.Size = new System.Drawing.Size(70, 25);
+            this.plugins.TabIndex = 0;
+            this.plugins.Text = "Plugins";
+            this.plugins.UseVisualStyleBackColor = true;
+            this.plugins.Click += new System.EventHandler(this.plugins_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -290,6 +302,7 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
+            this.Controls.Add(this.plugins);
             this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "Form1";
             this.Text = "Form1";
@@ -323,6 +336,7 @@
         public System.Windows.Forms.TextBox textBox7;
         public System.Windows.Forms.Label label7;
         public System.Windows.Forms.ListBox listBox1;
+        public System.Windows.Forms.Button plugins;
     }
 }
 

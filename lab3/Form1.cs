@@ -1,6 +1,7 @@
 ﻿using lab3.Clothes;
 using lab3.Core;
 using System;
+using System.Reflection;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -33,6 +34,23 @@ namespace lab3
         public Form1()
         {
             InitializeComponent();
+
+            Wear plugin;
+        public int CurrentIndex;
+            this.itemsList = new List<Item>();
+            InitializeComponent();
+            Assembly asm = Assembly.LoadFile(@"D:\Serialization\AdditionalClasses\bin\Debug\AdditionalClasses.dll");
+            foreach (Type t in asm.GetExportedTypes())
+            {
+                if (typeof(Item).IsAssignableFrom(t))
+                {
+                    plugin = (Item)asm.CreateInstance(t.FullName);
+                    mainFactory.FactoryDictionary.Add(plugin.GetType().Name, plugin);
+                    Array.Resize(ref this.ItemsTypes, this.ItemsTypes.Length + 1);
+                    this.ItemsTypes[this.ItemsTypes.Length - 1] = plugin.GetType();
+                }
+            }
+
             WearDictionary = new Dictionary<int, Controller>();
             WearDictionary.Add(0, new Controller() { name = "Dress", creator = new DressCreator() });
             WearDictionary.Add(1, new Controller() { name = "Jacket", creator = new JacketCreator() });
@@ -41,7 +59,12 @@ namespace lab3
             WearDictionary.Add(4, new Controller() { name = "Shorts", creator = new ShortsCreator() });
             WearDictionary.Add(5, new Controller() { name = "Tshirt", creator = new TshirtCreator() });
             wear = new List<Wear>();
+
         }
+
+        //
+
+        //
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -97,6 +120,19 @@ namespace lab3
                 formatter.Serialize(fs, wear);
             }
 
+        }
+
+        private void plugins_Click(object sender, EventArgs e)
+        {
+            var dialog = new OpenFileDialog();
+            dialog.ShowDialog();
+            dialog.CheckFileExists = true;
+            dialog.Multiselect = true;
+            var path = dialog.FileName;
+            /*
+            WearDictionary.Add(6, new Controller() { name = "Shoes", creator = new ShoesCreator() });
+            WearDictionary.Add(7, new Controller() { name = "Sneakers", creator = new SneakersCreator() });
+            WearDictionary.Add(8, new Controller() { name = "Socks", creator = new SocksCreator() });*/
         }
 
         private void buttonDeserialize_Click(object sender, EventArgs e)
